@@ -18,7 +18,6 @@ class CreatePasienTable extends Migration
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->string('alamat');
-            $table->string('umur')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('keterangan')->nullable();
             $table->softDeletes();

@@ -14,7 +14,10 @@ class PasienController extends Controller
      */
     public function index()
     {
-        return view('pasien.index');
+        $data = Pasien::orderBy('id', 'DESC')->get();
+        return view('Pasien.index', compact(
+            'data'
+        ));
     }
 
     /**
@@ -38,7 +41,15 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Pasien;
+        $model->nama = $request->nama;
+        $model->jenis_kelamin = $request->jenis_kelamin;
+        $model->alamat = $request->alamat;
+        $model->tanggal_lahir = $request->tanggal_lahir;
+        $model->keterangan = $request->keterangan;
+        $model->save();
+
+        return redirect('pasien')->with('success', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -58,9 +69,12 @@ class PasienController extends Controller
      * @param  \App\Models\Pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pasien $pasien)
+    public function edit($id)
     {
-        //
+        $model = Pasien::find($id);
+        return view('pasien.edit', compact(
+            'model'
+        ));
     }
 
     /**
@@ -70,9 +84,17 @@ class PasienController extends Controller
      * @param  \App\Models\Pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Pasien::find($id);
+        $model->nama = $request->nama;
+        $model->jenis_kelamin = $request->jenis_kelamin;
+        $model->alamat = $request->alamat;
+        $model->tanggal_lahir = $request->tanggal_lahir;
+        $model->keterangan = $request->keterangan;
+        $model->save();
+
+        return redirect('pasien')->with('success', 'Data Berhasil Diperbarui');
     }
 
     /**
@@ -81,8 +103,10 @@ class PasienController extends Controller
      * @param  \App\Models\Pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pasien $pasien)
+    public function destroy($id)
     {
-        //
+        $model = pasien::find($id);
+        $model->delete();
+        return redirect('pasien')->with('success', 'Pasien berhasil dihapus');;
     }
 }
