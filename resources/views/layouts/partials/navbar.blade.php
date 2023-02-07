@@ -1,35 +1,35 @@
-<header class="p-3 bg-dark text-white">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-        </ul>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{{ asset('assets/adminLTE/dist/img/avatar5.png') }}" class="user-image img-circle"
+                    alt="User Image">
+                <span class="hidden-xs">{{ auth()->user()->name }}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                    <img src="{{ asset('assets/adminLTE/dist/img/avatar5.png') }}" class="img-circle elevation-2"
+                        alt="User Image" width="50px" height="50px">
+                    <p>{{ auth()->user()->name }}</p>
+                </li>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-        </form>
-
-        @auth
-          {{auth()->user()->name}}
-          <div class="text-end">
-            <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
-          </div>
-        @endauth
-
-        @guest
-          <div class="text-end">
-            <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Login</a>
-            <a href="{{ route('register.perform') }}" class="btn btn-warning">Sign-up</a>
-          </div>
-        @endguest
-      </div>
-    </div>
-  </header>
+                <li class="user-footer">
+                    <div class="pull-right">
+                        <a href="{{ url('/logout') }}" class="btn btn-danger" style="width: 100%">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
