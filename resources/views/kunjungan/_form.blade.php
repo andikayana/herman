@@ -78,7 +78,7 @@
                     confirmButtonText: 'Ya',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = "kunjungan/{{ session('id') }}
+                        window.location = "/student-management/student/" + id
                     }
                 })
             @elseif (session('success-edit'))

@@ -48,8 +48,9 @@ class PasienController extends Controller
         $model->tanggal_lahir = $request->tanggal_lahir;
         $model->keterangan = $request->keterangan;
         $model->save();
-
-        return redirect('pasien')->with('success', 'Data Berhasil Disimpan');
+        $new_id = $model->id;
+        //dd($new_id);
+        return redirect('pasien/'.$new_id.'/edit')->with('success', 'Ingin menambahkan kunjungan?')->with('id', $new_id);
     }
 
     /**
@@ -93,8 +94,8 @@ class PasienController extends Controller
         $model->tanggal_lahir = $request->tanggal_lahir;
         $model->keterangan = $request->keterangan;
         $model->save();
-
-        return redirect('pasien')->with('success', 'Data Berhasil Diperbarui');
+        $new_id = $model->id;
+        return redirect('pasien/'.$new_id.'/edit')->with('success-edit', 'Data Berhasil Diupdate');
     }
 
     /**

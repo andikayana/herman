@@ -47,7 +47,7 @@
 
                 <li class="nav-item {{ Route::is('pasien*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Route::is('pasien*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>Pasien
                             <i class="right fas fa-angle-left"></i>
                         </p>
@@ -56,14 +56,14 @@
                         <li class="nav-item">
                             <a href="{{ url('pasien/create') }}"
                                 class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-chevron-right nav-icon"></i>
                                 <p>Pendafataran Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pasien/') }}"
                                 class="nav-link {{ Route::is('pasien.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-chevron-right nav-icon"></i>
                                 <p>Daftar Pasien</p>
                             </a>
                         </li>

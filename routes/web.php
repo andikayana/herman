@@ -21,7 +21,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Register Routes
          */
-        /* Route::get('/register', 'RegisterController@show')->name('register.show');
+       /*  Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform'); */
 
         /**
@@ -44,6 +44,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
+
         Route::resource('/pasien', PasienController::class);
 
     });
