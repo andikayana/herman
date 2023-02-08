@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>dr. Herman</title>
+    <title>Klinik dr. Herman</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -31,7 +31,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/adminLTE/dist/css/adminlte.min.css') }}">
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed {{ Route::is('pasien_visitation.create') ? 'sidebar-collapse' : '' }}">
     <div class="wrapper">
 
         {{-- NAVBAR --}}

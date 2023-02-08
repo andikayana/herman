@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pasien;
-use App\Models\PasienVisitation;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 
-class PasienVisitationController extends Controller
+class DokterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +14,7 @@ class PasienVisitationController extends Controller
      */
     public function index()
     {
-        $data = PasienVisitation::orderBy('id', 'ASC')->get();
-        return view('pasien_visitation.index', compact(
-            'data'
-        ));
-    }
-
-    public function search(Request $request)
-    {
-        if ($request->has('nama')) {
-            return Pasien::where('nama', 'like', '%' . $nama . '%')->get();
-        }
-
-        return response([]);
+        //
     }
 
     /**
@@ -37,10 +24,7 @@ class PasienVisitationController extends Controller
      */
     public function create()
     {
-        $model = new PasienVisitation();
-        return view('pasien_visitation.create', compact(
-            'model'
-        ));
+        //
     }
 
     /**
@@ -57,10 +41,10 @@ class PasienVisitationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PasienVisitation  $pasienVisitation
+     * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function show(PasienVisitation $pasienVisitation)
+    public function show(Dokter $dokter)
     {
         //
     }
@@ -68,10 +52,10 @@ class PasienVisitationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PasienVisitation  $pasienVisitation
+     * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function edit(PasienVisitation $pasienVisitation)
+    public function edit(Dokter $dokter)
     {
         //
     }
@@ -80,10 +64,10 @@ class PasienVisitationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PasienVisitation  $pasienVisitation
+     * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PasienVisitation $pasienVisitation)
+    public function update(Request $request, Dokter $dokter)
     {
         //
     }
@@ -91,10 +75,10 @@ class PasienVisitationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PasienVisitation  $pasienVisitation
+     * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PasienVisitation $pasienVisitation)
+    public function destroy(Dokter $dokter)
     {
         //
     }

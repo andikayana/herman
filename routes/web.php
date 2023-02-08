@@ -46,6 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/register', 'RegisterController@register')->name('register.perform');
 
         Route::resource('/pasien', PasienController::class);
+        Route::resource('/pasien_visitation', PasienVisitationController::class);
 
     });
 });

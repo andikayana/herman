@@ -45,8 +45,33 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ Route::is('pasien*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ Route::is('pasien*') ? 'active' : '' }}">
+                <li class="nav-item {{ Route::is('pasien_visitation.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{-- {{ Route::is('pasien*') ? 'active' : '' }} --}}">
+                        <i class="nav-icon fas fa-pen"></i>
+                        <p>Kunjungan Pasien
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('pasien_visitation/create') }}"
+                                class="nav-link {{ Route::is('pasien_visitation.create') ? 'active' : '' }}">
+                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <p>Tambah Kunjungan Pasien</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('pasien_visitation/') }}"
+                                class="nav-link {{ Route::is('pasien_visitation.index') ? 'active' : '' }}">
+                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <p>Daftar Kunjungan Pasien</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item {{ Route::is('pasien.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{-- {{ Route::is('pasien*') ? 'active' : '' }} --}}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>Pasien
                             <i class="right fas fa-angle-left"></i>
@@ -57,7 +82,7 @@
                             <a href="{{ url('pasien/create') }}"
                                 class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
                                 <i class="fa fa-chevron-right nav-icon"></i>
-                                <p>Pendafataran Pasien</p>
+                                <p>Tambah Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -69,8 +94,6 @@
                         </li>
                     </ul>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="{{ url('/') }}" class="nav-link">

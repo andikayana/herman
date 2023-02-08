@@ -37,7 +37,8 @@
                                         <th class="text-center">Tanggal Lahir</th>
                                         <th>Alamat</th>
                                         <th>Keterangan</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th class="text-center">Update</th>
+                                        <th class="text-center">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,18 +54,21 @@
                                             <td class="text-center">
                                                 <div class="row">
                                                     <a href="{{ url('pasien/' . $value->id . '/edit') }}"
-                                                        class="btn btn-warning btn-xs mr-1"><i class="fa fa-pen"></i>&ensp;Update
+                                                        class="btn btn-warning btn-block btn-sm"><i class="fa fa-pen"></i>&ensp;Update
                                                     </a>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="row">
                                                     <form action="{{ url('pasien/' . $value->id) }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <button class="btn btn-danger delete btn-xs ml-1" type="submit"
+                                                        <button class="btn btn-danger delete btn-block btn-sm" type="submit"
                                                             data-toggle="tooltip" data-id='{{ $value->id }}'
                                                             data-nama='{{ $value->nama }}'><i
                                                                 class="fa fa-trash"></i>&ensp;Delete</button>
                                                     </form>
                                                 </div>
-
                                             </td>
                                         </tr>
                                     @endforeach

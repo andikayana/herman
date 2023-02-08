@@ -9,10 +9,20 @@ use Alfa6661\AutoNumber\AutoNumberTrait;
 
 class PasienVisitation extends Model
 {
-    use HasFactory;
-
     use SoftDeletes;
     use AutoNumberTrait;
 
     protected $table = 'pasien_visitation';
+
+    public function getAutoNumberOptions()
+    {
+        return [
+            'visit_id' => [
+                'format' => function () {
+                    return date('Ymd').'?';
+                },
+                'length' => 4 // Jumlah digit yang akan digunakan sebagai nomor urut
+            ]
+        ];
+    }
 }

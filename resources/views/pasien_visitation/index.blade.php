@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4>Data Pasien</h4>
+                    <h4>Data Kunjungan Pasien</h4>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <a href="{{ url('pasien/create') }}" class="btn btn-info btn-block"><i
+                        <a href="{{ url('pasien_visitation/create') }}" class="btn btn-info btn-block"><i
                                 class="fa fa-plus"></i>&ensp;Tambah Pasien</a>
                     </ol>
                 </div>
