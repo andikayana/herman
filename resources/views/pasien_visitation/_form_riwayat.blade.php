@@ -10,8 +10,8 @@
                 <th>Keluhan</th>
                 <th>Rencana Kerja</th>
                 <th>Diagnosa</th>
-                <th class="text-center">Update</th>
-                <th class="text-center">Delete</th>
+                {{-- <th class="text-center">Update</th>
+                <th class="text-center">Delete</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                         <td>{{ $value->keluhan }}</td>
                         <td>{{ $value->rencana_kerja }}</td>
                         <td>{{ $value->diagnosa }}</td>
-                        <td class="text-center">
+                        {{-- <td class="text-center">
                             <div class="row">
                                 <a href="{{ url('pasien/' . $value->id . '/edit') }}"
                                     class="btn btn-warning btn-block btn-sm"><i class="fa fa-pen"></i>&ensp;Update
@@ -44,7 +44,7 @@
                                             class="fa fa-trash"></i>&ensp;Delete</button>
                                 </form>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             @endif

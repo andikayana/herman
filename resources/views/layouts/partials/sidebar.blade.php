@@ -56,14 +56,14 @@
                         <li class="nav-item">
                             <a href="{{ url('pasien_visitation/create') }}"
                                 class="nav-link {{ Route::is('pasien_visitation.create') ? 'active' : '' }}">
-                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Tambah Kunjungan Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pasien_visitation/') }}"
                                 class="nav-link {{ Route::is('pasien_visitation.index') ? 'active' : '' }}">
-                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Daftar Kunjungan Pasien</p>
                             </a>
                         </li>
@@ -81,14 +81,14 @@
                         <li class="nav-item">
                             <a href="{{ url('pasien/create') }}"
                                 class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
-                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Tambah Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pasien/') }}"
                                 class="nav-link {{ Route::is('pasien.index') ? 'active' : '' }}">
-                                <i class="fa fa-chevron-right nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Daftar Pasien</p>
                             </a>
                         </li>

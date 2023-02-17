@@ -6,7 +6,7 @@
                     @csrf
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><b>No. Rekam Medis</b></span>
+                            <span class="input-group-text"><b>No. RM</b></span>
                         </div>
                         <input class="form-control" type="text" name="norm" id="norm"
                            required pattern=".{6,}" oninvalid="this.setCustomValidity('Panjang RM 6 digit!!')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" placeholder="000000" maxlength="6" value="{{ $model->norm }}">

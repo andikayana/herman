@@ -16,6 +16,9 @@
                 <span class="input-group-text"><b>Sistolik</b></span>
             </div>
             <input type="text" class="form-control bg-white" name="sistolik" {{-- value="{!! $model_visitation_visitation->sistolik !!}" --}}>
+            <div class="input-group-append">
+                <span class="input-group-text">mmHg</span>
+            </div>
         </div>
     </div>
 
@@ -25,6 +28,9 @@
                 <span class="input-group-text"><b>Diastolik</b></span>
             </div>
             <input type="text" class="form-control bg-white" name="diastolik" {{-- value="{{ $model_visitation->diastolik }}" --}}>
+            <div class="input-group-append">
+                <span class="input-group-text">mmHg</span>
+            </div>
         </div>
     </div>
 
@@ -34,6 +40,9 @@
                 <span class="input-group-text"><b>Suhu</b></span>
             </div>
             <input type="text" class="form-control bg-white" name="suhu" {{-- value="{{ $model_visitation->diastolik }}" --}}>
+            <div class="input-group-append">
+                <span class="input-group-text">&deg;C</span>
+            </div>
         </div>
     </div>
 

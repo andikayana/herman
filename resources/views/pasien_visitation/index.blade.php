@@ -33,10 +33,10 @@
                                         <th class="text-center">No.</th>
                                         <th class="text-center">No RM</th>
                                         <th>Nama</th>
-                                        <th class="text-center">Jenis Kelamin</th>
-                                        <th class="text-center">Tanggal Lahir</th>
-                                        <th>Alamat</th>
-                                        <th>Keterangan</th>
+                                        <th>Tanggal Lahir & Alamat</th>
+                                        <th class="text-center">Tekanan</br>Darah</th>
+                                        <th class="text-center">Suhu</th>
+                                        <th class="text-center">Diagnosa</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -44,17 +44,21 @@
                                     @foreach ($data as $key => $value)
                                         <tr>
                                             <td class="text-center">{{ $key + 1 }}</td>
-                                            <td class="text-center text-bold">{{ $value->norm }}</td>
-                                            <td>{{ $value->nama }}</td>
-                                            <td class="text-center">{{ $value->jenis_kelamin }}</td>
-                                            <td class="text-center">{{ $value->tanggal_lahir ? \Carbon\Carbon::parse($value->tanggal_lahir)->format('d-m-Y') : '' }}</td>
-                                            <td>{{ $value->alamat }}</td>
-                                            <td>{{ $value->keterangan }}</td>
+                                            <td class="text-center text-bold">{{ $value->pasien_id }}</td>
+                                            <td>{{ $value->nama }}
+                                                </br>
+                                                <small class="text-primary">{{ $value->jenis_kelamin }}</small>
+                                            </td>
+                                            <td>{{ $value->tanggal_lahir ? \Carbon\Carbon::parse($value->tanggal_lahir)->format('d-m-Y') : '' }} </br> {{ $value->alamat }}</td>
+                                            <td class="text-center">{{ $value->sistolik }}/{{ $value->diastolik }} mmHg</td>
+                                            <td class="text-center">{{ $value->suhu }} &deg;C</td>
+                                            <td class="text-center">{{ $value->diagnosa }}</td>
                                             <td class="text-center">
-                                                <div class="row">
-                                                    <a href="{{ url('pasien/' . $value->id . '/edit') }}"
-                                                        class="btn btn-warning btn-xs mr-1"><i class="fa fa-pen"></i>&ensp;Update
-                                                    </a>
+                                                <a href="{{ url('pasien/' . $value->id . '/edit') }}"
+                                                    class="btn btn-warning btn-sm"><i class="fa fa-pen"></i>&ensp;Update
+                                                </a>
+                                                {{-- <div class="row">
+
                                                     <form action="{{ url('pasien/' . $value->id) }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -63,7 +67,7 @@
                                                             data-nama='{{ $value->nama }}'><i
                                                                 class="fa fa-trash"></i>&ensp;Delete</button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
 
                                             </td>
                                         </tr>

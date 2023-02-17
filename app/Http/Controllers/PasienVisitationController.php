@@ -18,7 +18,7 @@ class PasienVisitationController extends Controller
      */
     public function index()
     {
-        $data = PasienVisitation::orderBy('id', 'ASC')->get();
+        $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->orderBy('pasien_visitation.id', 'ASC')->get();
         return view('pasien_visitation.index', compact(
             'data'
         ));
@@ -31,8 +31,9 @@ class PasienVisitationController extends Controller
         //dd($model);
 
         if($model){
+            $data = Pasien::orderBy('id', 'DESC')->get();
             $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
-            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat);
+            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
         } else {
             //dd($model);
 
