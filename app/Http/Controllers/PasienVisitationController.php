@@ -48,10 +48,11 @@ class PasienVisitationController extends Controller
     public function create()
     {
         $model = new PasienVisitation();
+        $data = Pasien::orderBy('id', 'DESC')->get();
         $riwayat = null;
         return view('pasien_visitation.create', compact(
-            'model'
-        ))->with('riwayat', $riwayat);;
+            'model', 'data'
+        ))->with('riwayat', $riwayat);
     }
 
     /**

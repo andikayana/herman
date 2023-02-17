@@ -73,56 +73,51 @@
         </div>
     </div>
 
-    {{-- <div class="form-group col-md-12">
-        <button class="btn btn-info" type="submit" style="width: 100%">Simpan</button>
-    </div> --}}
 </div>
 
 <div class="modal fade" id="form-cari" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <form method="POST" action="{{ url('pegawai/' . $model->id . '/riwayat') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pencari Px Berdasarkan Nama</h5>
-                    <a href="{{ url('pasien/create') }}" class="btn btn-primary">Tambah Pasien</a>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
-                </div>
-
-                <div class="modal-body">
-                    {{-- <input type="hidden" name="riwayat_id" id="riwayat_id"> --}}
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><b>Nama</b></span>
-                                        </div>
-                                        <input class="form-control" type="text" name="nama_pendidikan"
-                                            id="nama_pendidikan">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-auto">
-                                <div class="input-group">
-                                    <a href="" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#form-cari">Cari Pasien</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div> --}}
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pencari Px Berdasarkan Nama</h5>
+                <a href="{{ url('pasien/create') }}" class="btn btn-primary">Tambah Pasien</a>
+                {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> --}}
             </div>
-        </form>
+
+            <div class="modal-body">
+                {{-- <input type="hidden" name="riwayat_id" id="riwayat_id"> --}}
+                <div class="col-md-12">
+                    <table id="tabelModal" name="tabelModal" class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">No.</th>
+                                <th class="text-center">No RM</th>
+                                <th>Nama</th>
+                                <th class="text-center">Jenis Kelamin</th>
+                                <th class="text-center">Tanggal Lahir</th>
+                                <th>Alamat</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $key => $value)
+                                <tr>
+                                    <td class="text-center">{{ $key + 1 }}</td>
+                                    <td class="text-center text-bold">{{ $value->norm }}</td>
+                                    <td>{{ $value->nama }}</td>
+                                    <td class="text-center">{{ $value->jenis_kelamin }}</td>
+                                    <td class="text-center">{{ $value->tanggal_lahir ? \Carbon\Carbon::parse($value->tanggal_lahir)->format('d-m-Y') : '' }}</td>
+                                    <td>{{ $value->alamat }}</td>
+                                    <td>{{ $value->keterangan }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -152,6 +147,16 @@
                     text: 'GAGAL!!',
                 })
             @endif
+
+            $("#tabelModal").DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
     </script>
 @endsection
