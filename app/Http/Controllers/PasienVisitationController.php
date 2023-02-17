@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
-use App\Models\PasienVisitation;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\PasienVisitation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class PasienVisitationController extends Controller
 {
@@ -23,11 +26,18 @@ class PasienVisitationController extends Controller
 
     public function search(Request $request)
     {
-        if ($request->has('nama')) {
-            return Pasien::where('nama', 'like', '%' . $nama . '%')->get();
-        }
 
-        return response([]);
+        $model = Pasien::find($request->norm);
+        //dd($model);
+
+        if($model){
+            $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
+            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat);
+        } else {
+            //dd($model);
+
+            return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
+        }
     }
 
     /**
@@ -38,9 +48,10 @@ class PasienVisitationController extends Controller
     public function create()
     {
         $model = new PasienVisitation();
+        $riwayat = null;
         return view('pasien_visitation.create', compact(
             'model'
-        ));
+        ))->with('riwayat', $riwayat);;
     }
 
     /**
@@ -51,7 +62,19 @@ class PasienVisitationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new PasienVisitation();
+        $model->pasien_id = $request->pasien_id;
+        $model->tanggal_kunjungan = $request->tanggal_kunjungan;
+        $model->sistolik = $request->sistolik;
+        $model->diastolik = $request->diastolik;
+        $model->suhu = $request->suhu;
+        $model->keluhan = $request->keluhan;
+        $model->rencana_kerja = $request->rencana_kerja;
+        $model->diagnosa = $request->diagnosa;
+        $model->dokter_id = auth()->user()->id;
+        $model->save();
+        //dd($new_id);
+        return Redirect::to('pasien_visitation/create')->with('success', 'Berhasil menambahkan kunjungan');
     }
 
     /**

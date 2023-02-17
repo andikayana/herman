@@ -31,7 +31,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/adminLTE/dist/css/adminlte.min.css') }}">
 
-<body class="hold-transition sidebar-mini layout-fixed {{ Route::is('pasien_visitation.create') ? 'sidebar-collapse' : '' }}">
+    <body class="hold-transition sidebar-mini layout-fixed {{-- {{ Route::is('pasien_visitation.create') ? 'sidebar-collapse' : '' }} --}}">
     <div class="wrapper">
 
         {{-- NAVBAR --}}

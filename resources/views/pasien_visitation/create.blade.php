@@ -29,10 +29,37 @@
                             <h3 class="card-title">Data Diri Pasien</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ url('pasien_visitation') }}" enctype="multipart/form-data">
+                            @include('pasien_visitation._form')
+                        </div>
+                    </div>
+
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Tambah Kunjungan Pasien</h3>
+                        </div>
+                        <form method="POST" action="{{ url('pasien_visitation') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                @include('pasien_visitation._form_create')
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- left column -->
+                <div class="col-md-8">
+                    <!-- Input addon -->
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Riwayat Kunjungan pasien</h3>
+                        </div>
+                        <div class="card-body">
+                            @include('pasien_visitation._form_riwayat')
+                            {{-- <form method="POST" action="{{ url('pasien_visitation') }}" enctype="multipart/form-data">
                                 @csrf
-                                @include('pasien_visitation._form')
-                            </form>
+
+                            </form> --}}
                         </div>
                     </div>
                 </div>
@@ -40,5 +67,3 @@
         </div>
     </section>
 @endsection
-
-

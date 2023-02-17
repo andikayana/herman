@@ -15,7 +15,7 @@ class CreatePasienVisitationTable extends Migration
     {
         Schema::create('pasien_visitation', function (Blueprint $table) {
             $table->id();
-            $table->integer('pasien_id');
+            $table->string('pasien_id');
             $table->string('visit_id')->unique();
             $table->dateTime('tanggal_kunjungan');
             $table->string('sistolik');

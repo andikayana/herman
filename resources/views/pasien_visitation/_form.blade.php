@@ -2,19 +2,23 @@
     <div class="form-group col-md-12">
         <div class="row">
             <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><b>No. Rekam Medis</b></span>
+                <form method="POST" action="{{ route('pasien_visitation.search') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><b>No. Rekam Medis</b></span>
+                        </div>
+                        <input class="form-control" type="text" name="norm" id="norm"
+                           required pattern=".{6,}" oninvalid="this.setCustomValidity('Panjang RM 6 digit!!')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" placeholder="000000" maxlength="6" value="{{ $model->norm }}">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+                        </span>
                     </div>
-                    <input class="form-control" type="number" name="norm" value="{{ $model->norm }}" required maxlength="6">
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>
-                    </span>
-                </div>
+                </form>
             </div>
             <div class="col-md-auto">
                 <div class="input-group">
-                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#form-cari">Cari</a>
+                    <a class="btn btn-danger" data-toggle="modal" data-target="#form-cari">Cari</a>
                 </div>
             </div>
         </div>
@@ -26,7 +30,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Nama</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="nama" value="{{ $model->nama }}" disabled>
+            <input type="text" class="form-control bg-white" name="nama" value="{!! $model->nama !!}" disabled>
         </div>
     </div>
 
@@ -35,7 +39,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Jenis Kemamin</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="jenis_kelamin" value="{{ $model->jenis_kelamin }}" disabled>
+            <input type="text" class="form-control bg-white" name="jenis_kelamin" value="{{ $model->jenis_kelamin }}"
+                disabled>
         </div>
     </div>
 
@@ -68,9 +73,9 @@
         </div>
     </div>
 
-    <div class="form-group col-md-12">
+    {{-- <div class="form-group col-md-12">
         <button class="btn btn-info" type="submit" style="width: 100%">Simpan</button>
-    </div>
+    </div> --}}
 </div>
 
 <div class="modal fade" id="form-cari" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,14 +101,16 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><b>Nama</b></span>
                                         </div>
-                                        <input class="form-control" type="text" name="nama_pendidikan" id="nama_pendidikan">
+                                        <input class="form-control" type="text" name="nama_pendidikan"
+                                            id="nama_pendidikan">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-auto">
                                 <div class="input-group">
-                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#form-cari">Cari Pasien</a>
+                                    <a href="" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#form-cari">Cari Pasien</a>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +126,7 @@
     </div>
 </div>
 
-@section('script')
+{{-- @section('script')
     <script>
         $(document).ready(function() {
             $('.btn-edit').click(function() {
@@ -133,30 +140,18 @@
             })
         });
     </script>
-@endsection
+@endsection --}}
 
-{{-- @section('script')
+@section('script')
     <script>
         $(document).ready(function() {
-            @if (session('success'))
+            @if (session('fail'))
                 Swal.fire({
-                    title: 'Pasien Berhasil Ditambahkan!!',
-                    text: '{{ session('success') }}',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location = "/student-management/student/" + id
-                    }
-                })
-            @elseif (session('success-edit'))
-                Swal.fire({
-                    title: 'Good job!',
-                    text: '{{ session('success-edit') }}',
-                    icon: 'success'
+                    icon: 'error',
+                    title: '{{ session('fail') }}',
+                    text: 'GAGAL!!',
                 })
             @endif
         });
     </script>
-@endsection --}}
+@endsection
