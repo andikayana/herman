@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pasien;
 use App\Models\User;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\Models\PasienVisitation;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -24,21 +25,37 @@ class PasienVisitationController extends Controller
         ));
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
 
-        $model = Pasien::find($request->norm);
-        //dd($model);
+        if($request->ajax()) {
+            $model = Pasien::find($request->norm);
+            dd($request);
 
-        if($model){
-            $data = Pasien::orderBy('id', 'DESC')->get();
-            $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
-            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
+            if($model){
+                $data = Pasien::orderBy('id', 'DESC')->get();
+                $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
+                return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
+            } else {
+                dd($model);
+
+                return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
+            }
         } else {
-            //dd($model);
+            $model = Pasien::find($request->norm);
+            dd($request);
 
-            return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
+            if($model){
+                $data = Pasien::orderBy('id', 'DESC')->get();
+                $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
+                return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
+            } else {
+                dd($model);
+
+                return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
+            }
         }
+
+
     }
 
     /**
