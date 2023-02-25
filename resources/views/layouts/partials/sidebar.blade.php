@@ -55,15 +55,15 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ url('pasien_visitation/create') }}"
-                                class="nav-link {{ Route::is('pasien_visitation.create') ? 'active' : '' }}">
-                                <i class="far fa-dot-circle nav-icon"></i>
+                                class="nav-link {{ Route::is('pasien_visitation.create') ||  Route::is('pasien_visitation.edit')? 'active' : '' }}">
+                                <i class="fas fa-genderless nav-icon"></i>
                                 <p>Tambah Kunjungan Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pasien_visitation/') }}"
                                 class="nav-link {{ Route::is('pasien_visitation.index') ? 'active' : '' }}">
-                                <i class="far fa-dot-circle nav-icon"></i>
+                                <i class="fas fa-genderless nav-icon"></i>
                                 <p>Daftar Kunjungan Pasien</p>
                             </a>
                         </li>
@@ -81,25 +81,43 @@
                         <li class="nav-item">
                             <a href="{{ url('pasien/create') }}"
                                 class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
-                                <i class="far fa-dot-circle nav-icon"></i>
+                                <i class="fas fa-genderless nav-icon"></i>
                                 <p>Tambah Pasien</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('pasien/') }}"
                                 class="nav-link {{ Route::is('pasien.index') ? 'active' : '' }}">
-                                <i class="far fa-dot-circle nav-icon"></i>
+                                <i class="fas fa-genderless nav-icon"></i>
                                 <p>Daftar Pasien</p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>Pelayanan Pasien</p>
+                <li class="nav-item {{ Route::is('laporan.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{-- {{ Route::is('pasien*') ? 'active' : '' }} --}}">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Laporan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('pasien/create') }}"
+                                class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
+                                <i class="fas fa-genderless nav-icon"></i>
+                                <p>Kunjungan Pasien</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('pasien/') }}"
+                                class="nav-link {{ Route::is('pasien.index') ? 'active' : '' }}">
+                                <i class="fas fa-genderless nav-icon"></i>
+                                <p>Data Pasien</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
