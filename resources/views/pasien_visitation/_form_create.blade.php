@@ -2,11 +2,11 @@
     <div class="form-group col-md-12">
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text"><b>Tanggal Kunjungan</b></span>
+                <span class="input-group-text"><b>Tanggal</b></span>
             </div>
             <input type="text" class="form-control bg-white" name="pasien_id" hidden value="{{ $model->norm }}">
-            <input class="form-control bg-white" type="date" name="tanggal_kunjungan"
-                id="tanggal_kunjungan" value="{{ date("Y-m-d") }}">
+            <input class="form-control bg-white" type="datetime-local" name="tanggal_kunjungan"
+                id="tanggal_kunjungan" value="{{ date("Y-m-d H:i") }}">
         </div>
     </div>
 
@@ -15,7 +15,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Sistolik</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="sistolik" {{-- value="{!! $model_visitation_visitation->sistolik !!}" --}}>
+            <input type="text" class="form-control bg-white" name="sistolik" value="{{ $model_visitation->sistolik }}">
             <div class="input-group-append">
                 <span class="input-group-text">mmHg</span>
             </div>
@@ -27,7 +27,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Diastolik</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="diastolik" {{-- value="{{ $model_visitation->diastolik }}" --}}>
+            <input type="text" class="form-control bg-white" name="diastolik" value="{{ $model_visitation->diastolik }}">
             <div class="input-group-append">
                 <span class="input-group-text">mmHg</span>
             </div>
@@ -39,7 +39,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Suhu</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="suhu" {{-- value="{{ $model_visitation->diastolik }}" --}}>
+            <input type="text" class="form-control bg-white" name="suhu" value="{{ $model_visitation->diastolik }}">
             <div class="input-group-append">
                 <span class="input-group-text">&deg;C</span>
             </div>
@@ -51,7 +51,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Keluhan</b></span>
             </div>
-            <textarea class="form-control bg-white" type="text" name="keluhan"></textarea>
+            <textarea class="form-control bg-white" type="text" name="keluhan">{{ $model_visitation->keluhan }}</textarea>
         </div>
     </div>
 
@@ -60,7 +60,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Rencana Kerja</b></span>
             </div>
-            <textarea class="form-control bg-white" type="text" name="rencana_kerja"></textarea>
+            <textarea class="form-control bg-white" type="text" name="rencana_kerja">{{ $model_visitation->rencana_kerja }}</textarea>
         </div>
     </div>
 
@@ -70,7 +70,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Diagnosa</b></span>
             </div>
-            <input class="form-control bg-white" type="text" name="diagnosa" {{-- value="{{ $model_visitation->alamat }}" --}}>
+            <input class="form-control bg-white" type="text" name="diagnosa" value="{{ $model_visitation->diagnosa }}">
         </div>
     </div>
 

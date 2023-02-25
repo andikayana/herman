@@ -51,15 +51,15 @@
                                 </div>
 
 
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <a href="{{ url('pasien_visitation/create') }}" class="btn bg-purple btn-block"><i
-                                        class="fa fa-plus"></i>&ensp;Tambah Kunjungan Pasien</a>
+                                        class="fa fa-plus"></i>&ensp;Tambah Kunjungan</a>
                                 </div>
 
-                                <div class="col-md-2">
+                                {{-- <div class="col-md-2">
                                     <a href="{{ url('pasien/create') }}" class="btn btn-info btn-block"><i
                                         class="fa fa-plus"></i>&ensp;Tambah Pasien</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -74,7 +74,7 @@
                                         <th class="text-center">Tekanan</br>Darah</th>
                                         <th class="text-center">Suhu</th>
                                         <th class="text-center">Diagnosa</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th class="text-center ">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +83,7 @@
                                             <td class="text-center">{{ $key + 1 }}</td>
                                             <td class="text-center text-bold">{{ $value->pasien_id }}
                                                 </br>
-                                                <small class="text-danger">{{ \Carbon\Carbon::parse($value->tanggal_kunjungan)->format('d-m-Y') }}</small>
+                                                <small class="text-danger">{{ $value->tanggal_kunjungan ? \Carbon\Carbon::parse($value->tanggal_kunjungan)->format('d-m-Y') : '' }}</small>
                                             </td>
                                             <td>{{ $value->nama }}
                                                 </br>
@@ -95,20 +95,19 @@
                                             <td class="text-center">{{ $value->suhu }} &deg;C</td>
                                             <td class="text-center">{{ $value->diagnosa }}</td>
                                             <td class="text-center">
-                                                <a href="{{ url('pasien/' . $value->id . '/edit') }}"
-                                                    class="btn btn-warning btn-sm"><i class="fa fa-pen"></i>&ensp;Update
-                                                </a>
-                                                {{-- <div class="row">
-
-                                                    <form action="{{ url('pasien/' . $value->id) }}" method="POST">
+                                                <div class="row">
+                                                    <a href="{{ url('pasien_visitation/' . $value->visitation_id . '/edit') }}"
+                                                        class="btn btn-warning btn-xs mr-1"><i class="fa fa-pen"></i>&ensp;Update
+                                                    </a>
+                                                    <form action="{{ url('pasien_visitation/' . $value->id) }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <button class="btn btn-danger delete btn-xs ml-1" type="submit"
-                                                            data-toggle="tooltip" data-id='{{ $value->id }}'
+                                                            data-toggle="tooltip" data-id='{{ $value->visitation_id }}'
                                                             data-nama='{{ $value->nama }}'><i
                                                                 class="fa fa-trash"></i>&ensp;Delete</button>
                                                     </form>
-                                                </div> --}}
+                                                </div>
 
                                             </td>
                                         </tr>
@@ -146,7 +145,7 @@
             event.preventDefault();
             Swal.fire({
                 title: 'Kamu Yakin?',
-                text: "Hapus data '" + nama + "'",
+                text: "Hapus Kunjungan '" + nama + "'",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',

@@ -21,50 +21,53 @@ class PasienVisitationController extends Controller
     public function index(Request $request)
     {
         if (request()->tanggal_mulai || request()->tanggal_selesai) {
-            $start_date = Carbon::parse(request()->tanggal_mulai)->toDateString();
-            $end_date = Carbon::parse(request()->tanggal_selesai)->toDateString();
+            $start_date = Carbon::createFromFormat('Y-m-d', request()->tanggal_mulai)->toDateString();
+            $end_date = Carbon::createFromFormat('Y-m-d', request()->tanggal_selesai)->toDateString();
             //dd($data);
-            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->whereBetween('tanggal_kunjungan',[$start_date,$end_date])->orderBy('pasien_visitation.id', 'ASC')->get();
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '>=', $start_date)
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '<=', $end_date)
+                ->orderBy('pasien_visitation.id', 'ASC')
+                ->select('pasien_visitation.id AS visitation_id', 'pasien_visitation.pasien_id', 'pasien_visitation.tanggal_kunjungan', 'pasien_visitation.sistolik', 'pasien_visitation.diastolik', 'pasien_visitation.suhu', 'pasien_visitation.diagnosa', 'pasien.*')
+                ->get();
             return view('pasien_visitation.index', compact(
-                'data', 'start_date', 'end_date'
+                'data',
+                'start_date',
+                'end_date'
             ));
         } else {
             $start_date = Carbon::parse(Carbon::now())->toDateString();
             $end_date = Carbon::parse(Carbon::now())->toDateString();
-            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->where('pasien_visitation.tanggal_kunjungan', '=' ,$start_date)->orderBy('pasien_visitation.id', 'ASC')->get();
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '=', $start_date)
+                ->select('pasien_visitation.id AS visitation_id', 'pasien_visitation.pasien_id', 'pasien_visitation.tanggal_kunjungan', 'pasien_visitation.sistolik', 'pasien_visitation.diastolik', 'pasien_visitation.suhu', 'pasien_visitation.diagnosa', 'pasien.*')
+                ->orderBy('visitation_id', 'ASC')
+                ->get();
+            //dd($data);
             return view('pasien_visitation.index', compact(
-                'data', 'start_date', 'end_date'
+                'data',
+                'start_date',
+                'end_date'
             ));
         }
-
     }
 
-    public function search(Request $request){
-
+    public function search(Request $request)
+    {
         $model = Pasien::find($request->norm);
-
-        if($model){
+        $model_visitation = new PasienVisitation();
+        if ($model) {
             $data = Pasien::orderBy('id', 'DESC')->get();
             $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
-            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
+            return view('pasien_visitation.create')
+            ->with('model', $model)
+            ->with('riwayat', $riwayat)
+            ->with('data', $data)
+            ->with('model_visitation', $model_visitation);
         } else {
             return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
         }
     }
-
-    public function search_modal(Request $request){
-
-        $model = Pasien::find($request->get('id'));
-        dd($model);
-        if($model){
-            $data = Pasien::orderBy('id', 'DESC')->get();
-            $riwayat = PasienVisitation::where('pasien_id', '=', $request->get('id'))->get();
-            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
-        } else {
-            return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
-        }
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -73,10 +76,14 @@ class PasienVisitationController extends Controller
     public function create()
     {
         $model = new PasienVisitation();
+        $model_visitation = new PasienVisitation();
         $data = Pasien::orderBy('id', 'DESC')->get();
         $riwayat = null;
+        // $model_visitation ='';
         return view('pasien_visitation.create', compact(
-            'model', 'data'
+            'model',
+            'data',
+            'model_visitation'
         ))->with('riwayat', $riwayat);
     }
 
@@ -120,9 +127,19 @@ class PasienVisitationController extends Controller
      * @param  \App\Models\PasienVisitation  $pasienVisitation
      * @return \Illuminate\Http\Response
      */
-    public function edit(PasienVisitation $pasienVisitation)
+    public function edit($id)
     {
-        //
+        $model_visitation = PasienVisitation::find($id);
+        $model = Pasien::where('norm', '=', $model_visitation->pasien_id)->first();
+        //dd($model_visitation->pasien_id);
+        $data = Pasien::orderBy('id', 'DESC')->get();
+        $riwayat = PasienVisitation::where('pasien_id', '=', $model_visitation->pasien_id)->get();
+        //dd($model);
+        return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')
+        ->with('model', $model)
+        ->with('riwayat', $riwayat)
+        ->with('data', $data)
+        ->with('model_visitation', $model_visitation);
     }
 
     /**
@@ -143,8 +160,10 @@ class PasienVisitationController extends Controller
      * @param  \App\Models\PasienVisitation  $pasienVisitation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PasienVisitation $pasienVisitation)
+    public function destroy($id)
     {
-        //
+        $model = PasienVisitation::find($id);
+        $model->delete();
+        return redirect('pasien_visitation')->with('success', 'Pasien berhasil dihapus');
     }
 }

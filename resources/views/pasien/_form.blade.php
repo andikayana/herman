@@ -78,7 +78,7 @@
                     confirmButtonText: 'Ya',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = "kunjungan/{{ session('id') }}
+                        window.location.href = "{{ url('pasien_visitation/create') }}";
                     }
                 })
             @elseif (session('success-edit'))

@@ -4,8 +4,7 @@
             <tr>
                 <th class="text-center">No.</th>
                 <th class="text-center">Tanggal Kunjungan</th>
-                <th class="text-center">Sistolik</th>
-                <th class="text-center">Diastolik</th>
+                <th class="text-center">Tekanan</br>Darah</th>
                 <th class="text-center">Suhu</th>
                 <th>Keluhan</th>
                 <th>Rencana Kerja</th>
@@ -20,9 +19,8 @@
                     <tr>
                         <td class="text-center"><b>{{ $key + 1 }}</b></td>
                         <td class="text-center">{{ $value->tanggal_kunjungan ? \Carbon\Carbon::parse($value->tanggal_kunjungan)->format('d-m-Y') : '' }}</td>
-                        <td class="text-center">{{ $value->sistolik }}</td>
-                        <td class="text-center">{{ $value->diastolik }}</td>
-                        <td class="text-center">{{ $value->suhu }}</td>
+                        <td class="text-center">{{ $value->sistolik }} / {{ $value->diastolik }} mmHg</td>
+                        <td class="text-center">{{ $value->suhu }} &deg;C</td>
                         <td>{{ $value->keluhan }}</td>
                         <td>{{ $value->rencana_kerja }}</td>
                         <td>{{ $value->diagnosa }}</td>

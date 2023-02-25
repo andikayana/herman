@@ -48,10 +48,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::resource('/pasien', PasienController::class);
         Route::resource('/pasien_visitation', PasienVisitationController::class);
-        Route::post('/pasien_visitation/search', [App\Http\Controllers\PasienVisitationController::class, 'search'])->name('pasien_visitation.search');
-        Route::get('/pasien_visitation/create/search', [App\Http\Controllers\PasienVisitationController::class, 'search_modal'])->name('pasien_visitation.search_modal');
+        Route::post('/pasien_visitation/create', [App\Http\Controllers\PasienVisitationController::class, 'search'])->name('pasien_visitation.search');
 
 
     });
 });
- 

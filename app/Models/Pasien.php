@@ -31,4 +31,5 @@ class Pasien extends Model
             ]
         ];
     }
+
 }

@@ -1,6 +1,3 @@
-@section('head')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 <div class="row">
     <div class="form-group col-md-12">
         <div class="row">
@@ -14,7 +11,7 @@
                         <input class="form-control" type="text" name="norm" id="norm"
                            required pattern=".{6,}" oninvalid="this.setCustomValidity('Panjang RM 6 digit!!')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" placeholder="000000" maxlength="6" value="{{ $model->norm }}">
                         <span class="input-group-append">
-                            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+                            <button type="submit" class="btn btn-info" id="btn-cari-norm"><i class="fas fa-search"></i></button>
                         </span>
                     </div>
                 </form>
@@ -33,7 +30,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Nama</b></span>
             </div>
-            <input type="text" class="form-control bg-white" name="nama" value="{!! $model->nama !!}" disabled>
+            <input type="text" class="form-control bg-white" name="nama" value="{!! $model->nama !!}" disabled required>
         </div>
     </div>
 
@@ -142,7 +139,6 @@
 @section('script')
     <script>
         $(document).ready(function() {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -181,18 +177,8 @@
                 var data=cursor.data();
                 var ids = data[1];
                 console.log('Clicked : ' + ids);
-
-                $.ajax({
-                    type: "get",
-                    url: "{{ route('pasien_visitation.search_modal') }}",
-                    data: { id : ids },
-                    success:function(data){
-                        console.log('Success : ', data);
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
+                document.getElementById("norm").value = data[1];
+                document.getElementById("btn-cari-norm").click();
             });
         });
     </script>

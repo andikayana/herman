@@ -108,6 +108,6 @@ class PasienController extends Controller
     {
         $model = pasien::find($id);
         $model->delete();
-        return redirect('pasien')->with('success', 'Pasien berhasil dihapus');;
+        return redirect('pasien')->with('success', 'Pasien berhasil dihapus');
     }
 }

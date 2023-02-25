@@ -25,4 +25,9 @@ class PasienVisitation extends Model
             ]
         ];
     }
+
+    /* public function pasien()
+    {
+        return $this->hasMany(PasienVisitation::class);
+    } */
 }
