@@ -29,7 +29,7 @@
                             <h3 class="card-title">Data Diri Pasien</h3>
                         </div>
                         <div class="card-body">
-                            @include('pasien_visitation._form')
+                            @include('pasien_visitation._form_data_diri')
                         </div>
                     </div>
 

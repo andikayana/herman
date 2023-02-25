@@ -18,7 +18,7 @@
             @if($riwayat != null)
                 @foreach ($riwayat as $key => $value)
                     <tr>
-                        <td class="text-center">{{ $key + 1 }}</td>
+                        <td class="text-center"><b>{{ $key + 1 }}</b></td>
                         <td class="text-center">{{ $value->tanggal_kunjungan ? \Carbon\Carbon::parse($value->tanggal_kunjungan)->format('d-m-Y') : '' }}</td>
                         <td class="text-center">{{ $value->sistolik }}</td>
                         <td class="text-center">{{ $value->diastolik }}</td>

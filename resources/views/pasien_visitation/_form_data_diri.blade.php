@@ -90,7 +90,6 @@
             </div>
 
             <div class="modal-body">
-                {{-- <input type="hidden" name="riwayat_id" id="riwayat_id"> --}}
                 <div class="col-md-12">
                     <table id="tabelModal" name="tabelModal" class="table">
                         <thead>
@@ -157,6 +156,12 @@
                     title: '{{ session('fail') }}',
                     text: 'GAGAL!!',
                 })
+            @elseif (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('success') }}',
+                    text: 'BERHASIL !!',
+                })
             @endif
 
             var table = $("#tabelModal").DataTable({
@@ -174,15 +179,18 @@
             $(tableBody).on('click', 'tr', function () {
                 var cursor = table.row($(this));
                 var data=cursor.data();
-                console.log(data[1]);
+                var ids = data[1];
+                console.log('Clicked : ' + ids);
 
                 $.ajax({
-                    type: "POST",
-                    url: "{{ route('pasien_visitation.search') }}",
-                    data: { "_token": "{{ csrf_token() }}", norm : data[1] },
-                    datatype: 'JSON',
+                    type: "get",
+                    url: "{{ route('pasien_visitation.search_modal') }}",
+                    data: { id : ids },
                     success:function(data){
-                        alert(data.success);
+                        console.log('Success : ', data);
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
                     }
                 });
             });

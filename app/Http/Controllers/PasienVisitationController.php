@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
@@ -17,45 +18,51 @@ class PasienVisitationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->orderBy('pasien_visitation.id', 'ASC')->get();
-        return view('pasien_visitation.index', compact(
-            'data'
-        ));
+        if (request()->tanggal_mulai || request()->tanggal_selesai) {
+            $start_date = Carbon::parse(request()->tanggal_mulai)->toDateString();
+            $end_date = Carbon::parse(request()->tanggal_selesai)->toDateString();
+            //dd($data);
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->whereBetween('tanggal_kunjungan',[$start_date,$end_date])->orderBy('pasien_visitation.id', 'ASC')->get();
+            return view('pasien_visitation.index', compact(
+                'data', 'start_date', 'end_date'
+            ));
+        } else {
+            $start_date = Carbon::parse(Carbon::now())->toDateString();
+            $end_date = Carbon::parse(Carbon::now())->toDateString();
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')->where('pasien_visitation.tanggal_kunjungan', '=' ,$start_date)->orderBy('pasien_visitation.id', 'ASC')->get();
+            return view('pasien_visitation.index', compact(
+                'data', 'start_date', 'end_date'
+            ));
+        }
+
     }
 
     public function search(Request $request){
 
-        if($request->ajax()) {
-            $model = Pasien::find($request->norm);
-            dd($request);
+        $model = Pasien::find($request->norm);
 
-            if($model){
-                $data = Pasien::orderBy('id', 'DESC')->get();
-                $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
-                return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
-            } else {
-                dd($model);
-
-                return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
-            }
+        if($model){
+            $data = Pasien::orderBy('id', 'DESC')->get();
+            $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
+            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
         } else {
-            $model = Pasien::find($request->norm);
-            dd($request);
-
-            if($model){
-                $data = Pasien::orderBy('id', 'DESC')->get();
-                $riwayat = PasienVisitation::where('pasien_id', '=', $request->norm)->get();
-                return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
-            } else {
-                dd($model);
-
-                return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
-            }
+            return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
         }
+    }
 
+    public function search_modal(Request $request){
 
+        $model = Pasien::find($request->get('id'));
+        dd($model);
+        if($model){
+            $data = Pasien::orderBy('id', 'DESC')->get();
+            $riwayat = PasienVisitation::where('pasien_id', '=', $request->get('id'))->get();
+            return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')->with('model', $model)->with('riwayat', $riwayat)->with('data', $data);
+        } else {
+            return Redirect::to('pasien_visitation/create')->with('fail', 'No. RM tidak Terdaftar');
+        }
     }
 
     /**

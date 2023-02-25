@@ -11,6 +11,7 @@ class Pasien extends Model
 {
     use SoftDeletes;
     use AutoNumberTrait;
+    use HasFactory;
 
     protected $table = 'pasien';
     protected $fillable = [
