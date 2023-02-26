@@ -166,4 +166,38 @@ class PasienVisitationController extends Controller
         $model->delete();
         return redirect('pasien_visitation')->with('success', 'Pasien berhasil dihapus');
     }
+
+    public function laporan_bulanan(Request $request)
+    {
+        if (request()->tanggal_mulai || request()->tanggal_selesai) {
+            $start_date = Carbon::createFromFormat('Y-m-d', request()->tanggal_mulai)->toDateString();
+            $end_date = Carbon::createFromFormat('Y-m-d', request()->tanggal_selesai)->toDateString();
+            //dd($data);
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '>=', $start_date)
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '<=', $end_date)
+                ->orderBy('pasien_visitation.id', 'ASC')
+                ->select('pasien_visitation.id AS visitation_id', 'pasien_visitation.pasien_id', 'pasien_visitation.tanggal_kunjungan', 'pasien_visitation.sistolik', 'pasien_visitation.diastolik', 'pasien_visitation.suhu', 'pasien_visitation.diagnosa', 'pasien.*')
+                ->get();
+            return view('laporan_bulanan.index', compact(
+                'data',
+                'start_date',
+                'end_date'
+            ));
+        } else {
+            $start_date = Carbon::parse(Carbon::now())->toDateString();
+            $end_date = Carbon::parse(Carbon::now())->toDateString();
+            $data = PasienVisitation::join('pasien', 'pasien.norm', '=', 'pasien_visitation.pasien_id')
+                ->whereDate('pasien_visitation.tanggal_kunjungan', '=', $start_date)
+                ->select('pasien_visitation.id AS visitation_id', 'pasien_visitation.pasien_id', 'pasien_visitation.tanggal_kunjungan', 'pasien_visitation.sistolik', 'pasien_visitation.diastolik', 'pasien_visitation.suhu', 'pasien_visitation.diagnosa', 'pasien.*')
+                ->orderBy('visitation_id', 'ASC')
+                ->get();
+            //dd($data);
+            return view('laporan_bulanan.index', compact(
+                'data',
+                'start_date',
+                'end_date'
+            ));
+        }
+    }
 }

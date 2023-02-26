@@ -7,10 +7,10 @@
                 <div class="col-sm-6">
                     <h1>Tambah Kunjungan Pasien</h1>
                 </div>
+
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Tambah Kunjungan pasien</li>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#form-cari" style="width: 100%"><i class="fas fa-search"></i>&ensp;Cari Pasien</a>
                     </ol>
                 </div>
             </div>

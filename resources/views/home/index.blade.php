@@ -6,16 +6,19 @@
 
         <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3 bg-info">
-                    <span class="info-box-icon"><i class="fas fa-plus"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Tambah Kunjungan</span>
-                        {{-- <span class="info-box-number">163,921</span> --}}
+                <a href="{{ url('pasien_visitation/create') }}">
+                    <div class="info-box mb-3 bg-info">
+                        <span class="info-box-icon"><i class="fas fa-plus"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Tambah Kunjungan</span>
+                            {{-- <span class="info-box-number">163,921</span> --}}
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="col-12 col-sm-6 col-md-3">
+                <a href="{{ url('pasien/create') }}">
                 <div class="info-box mb-3 bg-success">
                     <span class="info-box-icon"><i class="fas fa-plus"></i></span>
                     <div class="info-box-content">
@@ -23,6 +26,7 @@
                         {{-- <span class="info-box-number">163,921</span> --}}
                     </div>
                 </div>
+                </a>
             </div>
 
             <div class="col-12 col-sm-6 col-md-3">

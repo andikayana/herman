@@ -104,8 +104,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('pasien/create') }}"
-                                class="nav-link {{ Route::is('pasien.create') ? 'active' : '' }}">
+                            <a href="{{ url('laporan_bulanan/') }}"
+                                class="nav-link {{ Route::is('laporan_bulanan.index') ? 'active' : '' }}">
                                 <i class="fas fa-genderless nav-icon"></i>
                                 <p>Kunjungan Pasien</p>
                             </a>

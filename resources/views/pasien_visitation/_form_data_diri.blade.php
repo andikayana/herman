@@ -1,27 +1,18 @@
 <div class="row">
-    <div class="form-group col-md-12">
-        <div class="row">
-            <div class="col-md-8">
-                <form method="POST" action="{{ route('pasien_visitation.search') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><b>No. RM</b></span>
-                        </div>
-                        <input class="form-control" type="text" name="norm" id="norm"
-                           required pattern=".{6,}" oninvalid="this.setCustomValidity('Panjang RM 6 digit!!')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" placeholder="000000" maxlength="6" value="{{ $model->norm }}">
-                        <span class="input-group-append">
-                            <button type="submit" class="btn btn-info" id="btn-cari-norm"><i class="fas fa-search"></i></button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <a class="btn btn-danger" data-toggle="modal" data-target="#form-cari">Cari</a>
+    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+        <form method="POST" action="{{ route('pasien_visitation.search') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><b>No. RM</b></span>
                 </div>
+                <input class="form-control" type="text" name="norm" id="norm"
+                   required pattern=".{6,}" oninvalid="this.setCustomValidity('Panjang RM 6 digit!!')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" placeholder="000000" maxlength="6" value="{{ $model->norm }}">
+                <span class="input-group-append">
+                    <button type="submit" class="btn btn-info" id="btn-cari-norm"><i class="fas fa-search"></i></button>
+                </span>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="form-group col-md-12">
