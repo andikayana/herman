@@ -108,7 +108,6 @@
                                                                 class="fa fa-trash"></i>&ensp;Delete</button>
                                                     </form>
                                                 </div>
-
                                             </td>
                                         </tr>
                                     @endforeach

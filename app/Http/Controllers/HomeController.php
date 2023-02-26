@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
+use App\Models\PasienVisitation;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $jml_pasien = Pasien::all()->count();
+        $bulan = Carbon::parse(Carbon::now())->format('m');
+        $tahun = Carbon::parse(Carbon::now())->format('Y');
+        $jml_kunjungan = PasienVisitation::whereMonth('tanggal_kunjungan', '=', $bulan)
+            ->whereYear('tanggal_kunjungan', '=', $tahun)
+            ->count();
+        return view('home.index')
+            ->with('jml_kunjungan', $jml_kunjungan)
+            ->with('jml_pasien', $jml_pasien);
     }
 
     /**

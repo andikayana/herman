@@ -2,15 +2,48 @@
 
 @section('content')
     <div class="bg-light p-5 rounded">
-        @auth
         <h1>Dashboard</h1>
-        <p class="lead">Only authenticated users can access this section.</p>
-        <a class="btn btn-lg btn-primary" href="https://codeanddeploy.com" role="button">View more tutorials here &raquo;</a>
-        @endauth
 
-        @guest
-        <h1>Homepage</h1>
-        <p class="lead">Your viewing the home page. Please login to view the restricted data.</p>
-        @endguest
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3 bg-info">
+                    <span class="info-box-icon"><i class="fas fa-plus"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tambah Kunjungan</span>
+                        {{-- <span class="info-box-number">163,921</span> --}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3 bg-success">
+                    <span class="info-box-icon"><i class="fas fa-plus"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tambah Pasien</span>
+                        {{-- <span class="info-box-number">163,921</span> --}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3 bg-purple">
+                    <span class="info-box-icon"><i class="fas fa-chart-bar"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Jumlah Kunjungan Bulan Ini</span>
+                        <span class="info-box-number">{{ $jml_kunjungan }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3 bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Jumlah Pasien</span>
+                        <span class="info-box-number">{{ $jml_pasien }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
