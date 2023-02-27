@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\PasienVisitationController;
 
@@ -48,7 +49,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::resource('/pasien', PasienController::class);
         Route::resource('/pasien_visitation', PasienVisitationController::class);
+
         Route::post('/pasien_visitation/create', [App\Http\Controllers\PasienVisitationController::class, 'search'])->name('pasien_visitation.search');
         Route::get('/laporan_bulanan', [App\Http\Controllers\PasienVisitationController::class, 'laporan_bulanan'])->name('pasien_visitation.laporan_bulanan');
+        Route::get('/laporan_pasien', [App\Http\Controllers\PasienController::class, 'laporan_pasien'])->name('pasien.laporan_pasien');
+
+        Route::resource('/user', UserController::class);
     });
 });

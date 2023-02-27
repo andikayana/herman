@@ -20,6 +20,14 @@ class PasienController extends Controller
         ));
     }
 
+    public function laporan_pasien()
+    {
+        $data = Pasien::orderBy('id', 'DESC')->get();
+        return view('laporan_pasien.index', compact(
+            'data'
+        ));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

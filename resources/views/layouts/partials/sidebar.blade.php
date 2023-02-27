@@ -72,7 +72,7 @@
 
                 <li class="nav-item {{ Route::is('pasien.*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{-- {{ Route::is('pasien*') ? 'active' : '' }} --}}">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-user-friends"></i>
                         <p>Pasien
                             <i class="right fas fa-angle-left"></i>
                         </p>
@@ -118,6 +118,14 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/user') }}" class="nav-link {{ Route::is('user.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>User
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
