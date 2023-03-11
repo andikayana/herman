@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\Models\PasienVisitation;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //$user_id = Auth::user()->role;
         $jml_pasien = Pasien::all()->count();
         $bulan = Carbon::parse(Carbon::now())->format('m');
         $tahun = Carbon::parse(Carbon::now())->format('Y');

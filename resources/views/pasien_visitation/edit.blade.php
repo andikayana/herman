@@ -35,7 +35,7 @@
 
                     <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Kunjungan Pasien</h3>
+                            <h3 class="card-title">Update Kunjungan Pasien</h3>
                         </div>
                         <form method="POST" action="{{ url('pasien_visitation') }}" enctype="multipart/form-data">
                             @csrf
@@ -86,7 +86,7 @@
                                                 <span class="input-group-text"><b>Suhu</b></span>
                                             </div>
                                             <input type="text" class="form-control bg-white" name="suhu"
-                                                value="{{ $model_visitation->diastolik }}">
+                                                value="{{ $model_visitation->suhu }}">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">&deg;C</span>
                                             </div>

@@ -11,8 +11,22 @@ class PasienVisitation extends Model
 {
     use SoftDeletes;
     use AutoNumberTrait;
+    use HasFactory;
 
     protected $table = 'pasien_visitation';
+
+    protected $fillable = [
+        'pasien_id',
+        'visit_id',
+        'tanggal_kunjungan',
+        'sistolik',
+        'diastolik',
+        'suhu',
+        'keluhan',
+        'rencana_kerja',
+        'diagnosa',
+        'dokter_id'
+    ];
 
     public function getAutoNumberOptions()
     {

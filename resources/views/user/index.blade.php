@@ -33,7 +33,7 @@
                                         <th class="text-center">No.</th>
                                         <th>Nama</th>
                                         <th>Username</th>
-                                        <th class="text-center">Role</th>
+                                        <th>Role</th>
                                         <th class="text-center">Update</th>
                                         <th class="text-center">Delete</th>
                                     </tr>
@@ -44,9 +44,9 @@
                                             <td class="text-center">{{ $key + 1 }}</td>
                                             <td>{{ $value->name }}</td>
                                             <td>{{ $value->username }}</td>
-                                            <td class="text-center">{{ $value->role_name }}</td>
+                                            <td>{{ $value->role_name }}</td>
                                             <td class="text-center">
-                                                    <a href="{{ url('pasien/' . $value->id . '/edit') }}"
+                                                    <a href="{{ url('user/' . $value->id . '/edit') }}"
                                                         class="btn btn-warning btn-block btn-sm"><i
                                                             class="fa fa-pen"></i>&ensp;Update
                                                     </a>

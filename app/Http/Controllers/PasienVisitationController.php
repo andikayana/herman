@@ -134,12 +134,13 @@ class PasienVisitationController extends Controller
         //dd($model_visitation->pasien_id);
         $data = Pasien::orderBy('id', 'DESC')->get();
         $riwayat = PasienVisitation::where('pasien_id', '=', $model_visitation->pasien_id)->get();
-        //dd($model);
-        return view('pasien_visitation.create')->with('success', 'Ingin menambahkan kunjungan?')
+        //dd($model_visitation);
+        return view('pasien_visitation.create')
+        ->with('model_visitation', $model_visitation)
+        ->with('success', 'Ingin menambahkan kunjungan?')
         ->with('model', $model)
         ->with('riwayat', $riwayat)
-        ->with('data', $data)
-        ->with('model_visitation', $model_visitation);
+        ->with('data', $data);
     }
 
     /**

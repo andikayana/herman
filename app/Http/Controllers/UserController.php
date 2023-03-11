@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 
 class UserController extends Controller
 {
@@ -14,9 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::join('user_detail', 'user_detail.id_user', '=', 'users.id')
-            ->orderBy('users.id', 'ASC')
-            ->get();
+        $data = User::all();
         return view('user.index', compact(
             'data'
         ));
@@ -29,7 +29,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $model = new User();
+        return view('user.create', compact(
+            'model'
+        ));
     }
 
     /**
@@ -38,9 +41,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+        //dd($request);
+        User::create($request->validated());
+
+        //return redirect('pasien/'.$new_id.'/edit')->with('success', 'Ingin menambahkan kunjungan?')->with('id', $new_id);
+        return redirect('user/create')->with('success', 'Berhasil menambahkan user');
     }
 
     /**
@@ -62,7 +69,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = User::find($id);
+        return view('user.edit', compact(
+            'model'
+        ));
     }
 
     /**

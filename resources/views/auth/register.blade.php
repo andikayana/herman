@@ -40,6 +40,29 @@
             @endif
         </div>
 
+        <div class="form-group form-floating mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><b>Role User</b></span>
+                </div>
+                <select class="form-control select2" name="role" required>
+                    <option value="1">SuperAdmin </option>
+                    <option value="2">Dokter </option>
+                    <option value="3">Perawat </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-floating mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><b>Role User</b></span>
+                </div>
+                <input type="text" class="form-control" name="role_name" value="Super Admin" equired="required">
+
+            </div>
+        </div>
+
         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
         @include('auth.partials.copy')
